@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Romantis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Dekorasi Floating Hearts -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+
+    <!-- Dekorasi Confetti -->
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <!-- Amplop -->
+    <div class="envelope-container">
+        <div class="envelope" id="envelope" onclick="toggleEnvelope()">
+            <div class="flap"></div>
+            <div class="body"></div>
+            <div class="shadow"></div>
+        </div>
+        <div class="letter" id="letter">
+            <h1>Haloo Incess Sharin ❤️</h1>
+            <p>Seneng banget bisa kenal sama kamu, walaupun perkenalan kita cuma sebentar tapi aku udah naruh kamu di hati aku dan udah nganggep kamu sebagai orang spesial :)</p>
+            <p>Walaupun kamu suka lama dan kadang engga bales kalo chat, tapi notif dari kamu selalu yang aku tunggu hehe...</p>
+            <p>Semoga tahun ini membawa banyak kebahagiaan untukmu 🌟</p>
+            <p>Jangan lupa selalu jaga kesehatan dan tetap jadi Sharin yang ceria yaa 😊</p>
+            <p>Jangan lupa, aku ada 🐱❤️</p>
+            <div class="signature">- r -</div>
+        </div>
+    </div>
+
+    <!-- Kucing Interaktif -->
+    <div class="cat-container" id="cat-container"></div>
+
+    <!-- Musik -->
+    <audio id="background-music" loop>
+        <source src="https://archive.org/download/rex-orange-county-best-friend-official-audio/Rex%20Orange%20County%20-%20Best%20Friend%20%28Official%20Audio%29.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let isOpen = false;
+
+        function toggleEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const letter = document.getElementById('letter');
+            const music = document.getElementById('background-music');
+
+            if (isOpen) {
+                envelope.classList.remove('open');
+                letter.classList.remove('show');
+                isOpen = false;
+            } else {
+                envelope.classList.add('open');
+                letter.classList.add('show');
+                generateHearts();
+                generateConfetti();
+                generateCats();
+                music.currentTime = 29; // Start music at 29 seconds
+                music.play();
+                isOpen = true;
+            }
+        }
+
+        function generateHearts() {
+            const heartContainer = document.getElementById('floating-hearts');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.width = Math.random() * 20 + 15 + 'px';
+                heart.style.height = Math.random() * 20 + 15 + 'px';
+                heartContainer.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 8000); // Remove heart after animation ends
+            }
+        }
+
+        function generateConfetti() {
+            const confettiContainer = document.getElementById('confetti-container');
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = getRandomConfettiColor();
+                confettiContainer.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000); // Remove confetti after animation ends
+            }
+        }
+
+        function getRandomConfettiColor() {
+            const colors = ['#fad0c4', '#ff4d6d', '#ffc0cb', '#ff9a9e', '#fbc2eb'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function generateCats() {
+            const catContainer = document.getElementById('cat-container');
+            for (let i = 0; i < 5; i++) {
+                const cat = document.createElement('div');
+                cat.classList.add('cat');
+                cat.textContent = '🐱';
+                cat.style.left = Math.random() * 100 + '%';
+                cat.style.animationDelay = Math.random() * 2 + 's';
+                catContainer.appendChild(cat);
+
+                setTimeout(() => cat.remove(), 5000); // Remove cats after animation ends
+            }
+        }
+
+        // Ensure background music is ready
+        window.onload = () => {
+            const music = document.getElementById('background-music');
+            music.load(); // Load music to avoid issues
+        };
+    </script>
+</body>
+</html>
